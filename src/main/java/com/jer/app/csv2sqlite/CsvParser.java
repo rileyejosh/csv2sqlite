@@ -78,7 +78,7 @@ public class CsvParser {
     // write bad data to a CSV file
     String timeStamp = new SimpleDateFormat("yyyyMMddHHmm'.csv'").format(new Date());
 
-    FileWriter csvFileWriter = new FileWriter("bad-data-" + timeStamp);
+    FileWriter csvFileWriter = new FileWriter("C:\\Users\\tkd_s\\eclipse-workspace\\csv2sqlite\\bad_csv_data\\bad-data-" + timeStamp);
     System.out.println("Writing bad data to " + "bad-data-" + timeStamp);
 
     for (String record : badData) {
