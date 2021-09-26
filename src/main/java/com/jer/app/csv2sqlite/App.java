@@ -46,7 +46,7 @@ public class App {
 
     /// final Logger logger = LogManager.getLogger("App");
 
-    CsvParser parser = new CsvParser(new File("C:\\Users\\tkd_s\\Downloads\\data.csv"));
+    CsvParser parser = new CsvParser(new File("D:\\data.csv"));
     List<String> data = parser.parseCsvFile();
     parser.printStatistics();
     CsvLoader loader = new CsvLoader(data);

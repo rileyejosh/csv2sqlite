@@ -62,9 +62,10 @@ public class CsvParser {
     // System.out.println(numOfCol);
     badData = new ArrayList<String>();
     for (int i = 1; i < data.size(); i++) {
-      String[] elements = data.get(i).split("\\s+");
+      String[] elements = data.get(i).split("\\s+"); //matches sequence of one or more whitespace characters.
+      System.out.println(elements.length);
       if (elements.length < numOfCol) {
-        // add records with data elements that don't match column count,
+        // add records that don't match column count,
         // to a list for bad data
         badData.add(listOfRecords.get(i));
 
@@ -89,6 +90,17 @@ public class CsvParser {
     csvFileWriter.close();
 
     return data;
+
+  }
+
+  public static void main(String[] args) {
+
+    CsvParser p = new CsvParser(new File("C:\\Users\\tkd_s\\Downloads\\data.csv"));
+    try {
+      p.parseCsvFile();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
   }
 
