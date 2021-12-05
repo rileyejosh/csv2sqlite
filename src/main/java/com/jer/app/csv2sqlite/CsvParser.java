@@ -59,11 +59,10 @@ public class CsvParser {
     // verify data elements of each record matches column count
     int numOfCol = 0;
     numOfCol = data.get(0).replace(" ", "").length();
-    // System.out.println(numOfCol);
     badData = new ArrayList<String>();
     for (int i = 1; i < data.size(); i++) {
-      String[] elements = data.get(i).split("\\s+"); //matches sequence of one or more whitespace characters.
-      System.out.println(elements.length);
+      String[] elements = data.get(i).split("\\s+"); // matches sequence of one or more whitespace characters.
+      // System.out.println(elements.length);
       if (elements.length < numOfCol) {
         // add records that don't match column count,
         // to a list for bad data
@@ -73,13 +72,15 @@ public class CsvParser {
       }
     }
     
-    // perform final data verification
-    //TODO for(String s : )
+    //TODO perform final data verification for word spacing issue
+    //for(String s : )
         
     // write bad data to a CSV file
     String timeStamp = new SimpleDateFormat("yyyyMMddHHmm'.csv'").format(new Date());
 
-    FileWriter csvFileWriter = new FileWriter("C:\\Users\\tkd_s\\eclipse-workspace\\csv2sqlite\\bad_csv_data\\bad-data-" + timeStamp);
+    FileWriter csvFileWriter = new FileWriter(
+            "C:\\Users\\tkd_s\\eclipse-workspace\\csv2sqlite\\bad_csv_data\\bad-data-"
+            + timeStamp);
     System.out.println("Writing bad data to " + "bad-data-" + timeStamp);
 
     for (String record : badData) {
@@ -93,16 +94,7 @@ public class CsvParser {
 
   }
 
-  public static void main(String[] args) {
 
-    CsvParser p = new CsvParser(new File("C:\\Users\\tkd_s\\Downloads\\data.csv"));
-    try {
-      p.parseCsvFile();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-  }
 
   //TODO
   /**
