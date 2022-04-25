@@ -68,7 +68,7 @@ public class CsvLoader {
 
     try (Connection conn = DbConnectionManager.connect()) {
       stmt = conn.prepareStatement("select * from " + qualifiedName + " where 0=1");
-      rs = stmt.executeQuery();// you'll get an empty ResultSet but you'll still get the metadata
+      rs = stmt.executeQuery();// you'll get an empty ResultSet, but you'll still get the metadata
       rsmd = rs.getMetaData();
       columnNames = new ArrayList<String>();
 
@@ -160,7 +160,7 @@ public class CsvLoader {
         m1 = p.matcher(csvData.get(i));
         while (m1.find()) {
 
-          if ( i == csvData.size() ) {
+          if( i == csvData.size() ) {
 
 
           }
