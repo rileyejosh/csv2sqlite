@@ -11,7 +11,7 @@
 *.ctxt
 
 # Project Setup files and directories
-target
+target/
 .classpath
 .project
 
