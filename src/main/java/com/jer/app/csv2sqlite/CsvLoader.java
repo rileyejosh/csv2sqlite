@@ -18,16 +18,16 @@ import java.util.regex.Pattern;
 
 public class CsvLoader {
 
-  static List<String> csvData = null;
+  static List<List<String>> csvData = null;
 
-  public CsvLoader(List<String> data) {
+  public CsvLoader(List<List<String>> data) {
 
     csvData = data;
   }
 
   private static void createTable() {
 
-    int numOfCols = csvData.get(0).replace(" ", "").length();
+    int numOfCols = csvData.get(0).size();
 
     String sqlTable = "CREATE TABLE IF NOT EXISTS CsvData (\n";
 
@@ -153,18 +153,13 @@ public class CsvLoader {
 
       int index = 1;
 
-      Pattern p = Pattern.compile("[^\\s\"']+|\"[^\"]*\"|'[^']*'");
-      Matcher m1;
-      System.out.println(csvData.get(5));
+      // Pattern p = Pattern.compile("[^\\s\"']+|\"[^\"]*\"|'[^']*'");
+      // Matcher m1;
       for (int i = 0; i < csvData.size(); i++) {
-        m1 = p.matcher(csvData.get(i));
-        while (m1.find()) {
+        // m1 = p.matcher(csvData.get(i));
+        for(int j = 0; j < csvData.get(i).size(); j++) {
 
-          if( i == csvData.size() ) {
-
-
-          }
-          ps.setObject(index, m1.group());
+          ps.setObject(index, csvData.get(i).get(j));
           index++;
 
         }
