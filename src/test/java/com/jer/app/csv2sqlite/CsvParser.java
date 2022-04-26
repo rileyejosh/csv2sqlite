@@ -7,8 +7,7 @@ import org.junit.Test;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-{
+class CsvParserTest {
     /**
      * Rigorous Test :-)
      */
