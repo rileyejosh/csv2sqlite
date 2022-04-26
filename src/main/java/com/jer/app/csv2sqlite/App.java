@@ -1,25 +1,11 @@
 package com.jer.app.csv2sqlite;
 
-import com.jer.app.utilities.FilePathRetriever;
-
-import java.io.BufferedInputStream;
-
-import java.io.BufferedReader;
-
 import java.io.File;
-
-import java.io.FileReader;
-import java.io.FileWriter;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.Format;
-
-import java.text.SimpleDateFormat;
 
 import java.util.List;
-
-import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -44,7 +30,7 @@ public class App {
    */
   public static void main(String[] args) throws IOException, SQLException {
 
-    final Logger logger = LogManager.getLogger("App");
+    final Logger logger = LogManager.getLogger("CSV2SQLite App");
 
     CsvParser parser = new CsvParser(new File("D:\\data1.csv"));
     List<List<String>> data = parser.parseCsvFile();
