@@ -44,11 +44,10 @@ public class App {
    */
   public static void main(String[] args) throws IOException, SQLException {
 
-    /// final Logger logger = LogManager.getLogger("App");
+    final Logger logger = LogManager.getLogger("App");
 
-    CsvParser parser = new CsvParser(new File("C:\\Users\\tkd_s\\Downloads\\data.csv"));
-    List<String> data = parser.parseCsvFile();
-    parser.printStatistics();
+    CsvParser parser = new CsvParser(new File("D:\\data1.csv"));
+    List<List<String>> data = parser.parseCsvFile();
     CsvLoader loader = new CsvLoader(data);
     loader.loadDataToDb();
     

@@ -17,9 +17,12 @@ public class CsvParser {
 
     File csvFile = null;
     List<String> badData;
+<<<<<<< HEAD
     int recordsReceived = 0;
     int recordsSuccessful = 0;
     int recordsFailed = 0;
+=======
+>>>>>>> 31cda2ce4c2d54205070b251950e6fac2ba7ffc2
 
     /**
      * This constructor initializes the CSV file reference.
@@ -77,7 +80,10 @@ public class CsvParser {
 
         }
 
+<<<<<<< HEAD
         recordsReceived = data.size();
+=======
+>>>>>>> 31cda2ce4c2d54205070b251950e6fac2ba7ffc2
         int numOfCol = 0;
         numOfCol = data.remove(0).size(); // remove first record to use as baseline for correct number of columns
 
@@ -114,7 +120,10 @@ public class CsvParser {
                         tempStr += data.get(i).get(j) + ",";
                 }
                 badData.add(tempStr);
+<<<<<<< HEAD
                 data.remove(i);
+=======
+>>>>>>> 31cda2ce4c2d54205070b251950e6fac2ba7ffc2
                 tempStr = "";
 
             }
@@ -124,9 +133,12 @@ public class CsvParser {
         // write bad data to a CSV file
         writeBadDataToFile(badData);
 
+<<<<<<< HEAD
         // write statistics to a log file
         printStatistics(recordsReceived, recordsSuccessful, recordsFailed);
 
+=======
+>>>>>>> 31cda2ce4c2d54205070b251950e6fac2ba7ffc2
         return data;
 
     }
@@ -159,6 +171,7 @@ public class CsvParser {
     /**
      * Print CSV data statistics to a log file.
      */
+<<<<<<< HEAD
     private static void printStatistics(int recReceived, int recSuccess, int recFailed ) {
 
         System.out.println("Printing statistics to a log file...");
@@ -166,6 +179,11 @@ public class CsvParser {
         System.out.println("Number of records successful: " + recSuccess);
         System.out.println("Number of records failed: " + recFailed);
 
+=======
+    private static void printStatistics(int recsRecieved, int recsSuccess, int recsFailed ) {
+
+        System.out.println("Printing statistics to a log file...");
+>>>>>>> 31cda2ce4c2d54205070b251950e6fac2ba7ffc2
 
     }
 
