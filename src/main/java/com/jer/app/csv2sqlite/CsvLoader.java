@@ -12,8 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class CsvLoader {
@@ -117,8 +115,7 @@ public class CsvLoader {
       conn = DriverManager.getConnection(url);
 
       if (conn != null) {
-        // DatabaseMetaData meta = conn.getMetaData();
-        // System.out.println("The driver name is: " + meta.getDriverName());
+
         System.out.println("Connection to " + url + " has been established.");
       }
 
@@ -127,7 +124,7 @@ public class CsvLoader {
       createTable();
 
       // populate this list with CSV data
-      // List<Object> data;
+
 
       // get the table column names
       List<String> columnNames = getTableColumns("CsvData", "");
@@ -153,10 +150,8 @@ public class CsvLoader {
 
       int index = 1;
 
-      // Pattern p = Pattern.compile("[^\\s\"']+|\"[^\"]*\"|'[^']*'");
-      // Matcher m1;
       for (int i = 0; i < csvData.size(); i++) {
-        // m1 = p.matcher(csvData.get(i));
+
         for(int j = 0; j < csvData.get(i).size(); j++) {
 
           ps.setObject(index, csvData.get(i).get(j));

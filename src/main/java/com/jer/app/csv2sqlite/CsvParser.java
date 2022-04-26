@@ -17,12 +17,10 @@ public class CsvParser {
 
     File csvFile = null;
     List<String> badData;
-<<<<<<< HEAD
     int recordsReceived = 0;
     int recordsSuccessful = 0;
     int recordsFailed = 0;
-=======
->>>>>>> 31cda2ce4c2d54205070b251950e6fac2ba7ffc2
+
 
     /**
      * This constructor initializes the CSV file reference.
@@ -80,10 +78,9 @@ public class CsvParser {
 
         }
 
-<<<<<<< HEAD
+
         recordsReceived = data.size();
-=======
->>>>>>> 31cda2ce4c2d54205070b251950e6fac2ba7ffc2
+
         int numOfCol = 0;
         numOfCol = data.remove(0).size(); // remove first record to use as baseline for correct number of columns
 
@@ -95,7 +92,7 @@ public class CsvParser {
         // verify columns of each record match the column count
         int[] countOfRecordCol = new int[data.size()];
         int counter = 0;
-        for(int i = 0; i < data.size(); i++ ) {
+        for (int i = 0; i < data.size(); i++) {
 
             for (int j = 0; j < data.get(i).size(); j++) {
 
@@ -120,10 +117,9 @@ public class CsvParser {
                         tempStr += data.get(i).get(j) + ",";
                 }
                 badData.add(tempStr);
-<<<<<<< HEAD
+
                 data.remove(i);
-=======
->>>>>>> 31cda2ce4c2d54205070b251950e6fac2ba7ffc2
+
                 tempStr = "";
 
             }
@@ -133,12 +129,14 @@ public class CsvParser {
         // write bad data to a CSV file
         writeBadDataToFile(badData);
 
-<<<<<<< HEAD
+        recordsSuccessful = data.size();
+        recordsFailed = badData.size();
+
+
         // write statistics to a log file
         printStatistics(recordsReceived, recordsSuccessful, recordsFailed);
 
-=======
->>>>>>> 31cda2ce4c2d54205070b251950e6fac2ba7ffc2
+
         return data;
 
     }
@@ -167,34 +165,45 @@ public class CsvParser {
         csvFileWriter.close();
     }
 
-
     /**
      * Print CSV data statistics to a log file.
      */
-<<<<<<< HEAD
-    private static void printStatistics(int recReceived, int recSuccess, int recFailed ) {
 
-        System.out.println("Printing statistics to a log file...");
-        System.out.println("Number of records received: " + recReceived);
-        System.out.println("Number of records successful: " + recSuccess);
-        System.out.println("Number of records failed: " + recFailed);
+    private static void printStatistics(int recReceived, int recSuccess, int recFailed)  {
 
-=======
-    private static void printStatistics(int recsRecieved, int recsSuccess, int recsFailed ) {
+        Logger logger = Logger.getLogger("CSV2SQLiteLog");
+        FileHandler fh;
 
-        System.out.println("Printing statistics to a log file...");
->>>>>>> 31cda2ce4c2d54205070b251950e6fac2ba7ffc2
+        try {
+
+            // This block configures the logger with handler and formatter
+            fh = new FileHandler("D://csv2sqlite.log");
+            logger.addHandler(fh);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+
+
+            System.out.println("Printing statistics to a log file...");
+
+            // the following statement is used to log any messages
+            logger.info("Number of records received: " + recReceived);
+            logger.info("Number of records successful: " + recSuccess);
+            logger.info("Number of records failed: " + recFailed);
+
+
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
 
-    public static void main(String[] args) throws IOException {
 
 
-        CsvParser parser = new CsvParser(new File("D:\\data1.csv"));
-        parser.parseCsvFile();
 
-    }
 }
 
 
