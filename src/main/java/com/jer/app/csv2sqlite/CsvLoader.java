@@ -123,9 +123,6 @@ public class CsvLoader {
       // create database table
       createTable();
 
-      // populate this list with CSV data
-
-
       // get the table column names
       List<String> columnNames = getTableColumns("CsvData", "");
 
@@ -158,29 +155,13 @@ public class CsvLoader {
           index++;
 
         }
-        ps.executeUpdate();
+        ps.addBatch();
+
         index = 1;
 
       }
+      ps.executeBatch();
 
-
-      // ps.executeUpdate();
-
-      // ps.setObject(1, testData[0]);
-      // ps.setObject(2, testData[1]);
-
-
-
-      //
-      // for (int i = 0; i < data.size(); i++) { ps.setObject(index ++, data.get(i)); }
-      //
-      //
-      // for (Object o : data) { ps.setObject(o); // you must pass objects of correct type }
-      //
-      // ps.execute(); // this inserts your data } catch (SQLException e) {
-      //
-      // System.out.println(e.getMessage()); }
-      //
       ps.close();
       conn.close();
 

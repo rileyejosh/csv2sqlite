@@ -31,14 +31,10 @@ public class App {
   public static void main(String[] args) throws IOException, SQLException {
 
     final Logger logger = LogManager.getLogger("CSV2SQLite App");
-
     CsvParser parser = new CsvParser(new File("D:\\data1.csv"));
     List<List<String>> data = parser.parseCsvFile();
     CsvLoader loader = new CsvLoader(data);
     loader.loadDataToDb();
-    
-
 
   }
-
 }

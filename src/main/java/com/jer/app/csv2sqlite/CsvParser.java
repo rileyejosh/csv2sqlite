@@ -84,13 +84,12 @@ public class CsvParser {
         int numOfCol = 0;
         numOfCol = data.remove(0).size(); // remove first record to use as baseline for correct number of columns
 
-        // add records that are less than the column count to a list for invalid data
+
         badData = new ArrayList<String>();
         List<String> tempList = new ArrayList<String>();
-        String tempStr = "";
+        StringBuilder tempStr = new StringBuilder();
 
-        // verify columns of each record match the column count
-        int[] countOfRecordCol = new int[data.size()];
+        // verify total # of columns of each record match the column count
         int counter = 0;
         for (int i = 0; i < data.size(); i++) {
 
@@ -98,32 +97,12 @@ public class CsvParser {
 
                 if (!data.get(i).get(j).isEmpty())
                     counter++;
-
             }
-            countOfRecordCol[i] = counter;
+            // add records that are less than the column count to a list for invalid data
+            if(counter < numOfCol)
+                badData.add(printCsvString(data.remove(i)));
+
             counter = 0;
-        }
-
-        // for columns of each record that does not match the column count, add them to a list for invalid data
-        for (int i = 0; i < data.size(); i++) {
-
-            if (countOfRecordCol[i] < numOfCol) {
-
-                for (int j = 0; j < data.get(i).size(); j++) {
-
-                    if (data.get(i).get(j).equals(data.get(i).get(data.get(i).size() - 1))) {
-                        tempStr += data.get(i).get(j);
-                    } else
-                        tempStr += data.get(i).get(j) + ",";
-                }
-                badData.add(tempStr);
-
-                data.remove(i);
-
-                tempStr = "";
-
-            }
-
         }
 
         // write bad data to a CSV file
@@ -141,6 +120,21 @@ public class CsvParser {
 
     }
 
+    private String printCsvString(List<String> csv) {
+
+        String tempStr = "";
+
+        for(int i = 0; i < csv.size(); i++) {
+
+            if (i == csv.size()-1)
+                tempStr += csv.get(i);
+             else
+                tempStr += csv.get(i) + ",";
+
+        }
+        return tempStr;
+    }
+
     /**
      * Write invalid data to a CSV file
      */
@@ -154,7 +148,7 @@ public class CsvParser {
 
         System.out.println("Writing bad data to " + "bad-data-" + timeStamp);
 
-        String temp = " ";
+        String temp = "";
         for (int i = 0; i < invalidData.size(); i++) {
 
             csvFileWriter.append(invalidData.get(i));
@@ -169,7 +163,7 @@ public class CsvParser {
      * Print CSV data statistics to a log file.
      */
 
-    private static void printStatistics(int recReceived, int recSuccess, int recFailed)  {
+    private static void printStatistics(int recReceived, int recSuccess, int recFailed) {
 
         Logger logger = Logger.getLogger("CSV2SQLiteLog");
         FileHandler fh;
@@ -199,10 +193,6 @@ public class CsvParser {
 
 
     }
-
-
-
-
 
 }
 
