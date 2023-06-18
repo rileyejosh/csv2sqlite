@@ -15,7 +15,7 @@ target/
 .classpath
 .project
 .idea/
-bad_csv_data/
+csv_info/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
