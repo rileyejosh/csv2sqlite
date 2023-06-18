@@ -183,22 +183,25 @@ public class CsvParser {
             if (!logFile.exists()) {
                 if (logFile.createNewFile()) {
                     System.out.println("Log file created successfully.");
+                    // This block configures the logger with handler and formatter
+                    fh = new FileHandler(csvInfoDir + "\\" + "csv2sqlite.log");
+                    logger.addHandler(fh);
+                    SimpleFormatter formatter = new SimpleFormatter();
+                    fh.setFormatter(formatter);
+
                 } else {
                     System.out.println("Failed to create log file.");
+                    return;
                 }
             } else {
                 System.out.println("Log file already exists.");
+                // This block configures the logger with handler and formatter
+                fh = new FileHandler(csvInfoDir + "\\" + "csv2sqlite.log");
+                logger.addHandler(fh);
+                SimpleFormatter formatter = new SimpleFormatter();
+                fh.setFormatter(formatter);
+
             }
-
-            // This block configures the logger with handler and formatter
-            fh = new FileHandler("D://csv2sqlite.log");
-            logger.addHandler(fh);
-            SimpleFormatter formatter = new SimpleFormatter();
-            fh.setFormatter(formatter);
-
-
-
-
 
             System.out.println("Printing statistics to a log file...");
 
