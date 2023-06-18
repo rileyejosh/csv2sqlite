@@ -159,7 +159,7 @@ public class CsvLoader {
 
         index = 1;
 
-      }
+      } 
       ps.executeBatch();
 
       ps.close();

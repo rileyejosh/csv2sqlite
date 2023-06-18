@@ -1,5 +1,7 @@
 package com.jer.app.csv2sqlite;
 
+import com.jer.app.utilities.FilePathRetriever;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 // import java.io.FileNotFoundException;
@@ -20,6 +22,7 @@ public class CsvParser {
     int recordsReceived = 0;
     int recordsSuccessful = 0;
     int recordsFailed = 0;
+    static String csvInfoDir = "csv_info";
 
 
     /**
@@ -99,7 +102,7 @@ public class CsvParser {
                     counter++;
             }
             // add records that are less than the column count to a list for invalid data
-            if(counter < numOfCol)
+            if (counter < numOfCol)
                 badData.add(printCsvString(data.remove(i)));
 
             counter = 0;
@@ -111,10 +114,8 @@ public class CsvParser {
         recordsSuccessful = data.size();
         recordsFailed = badData.size();
 
-
         // write statistics to a log file
         printStatistics(recordsReceived, recordsSuccessful, recordsFailed);
-
 
         return data;
 
@@ -124,17 +125,22 @@ public class CsvParser {
 
         String tempStr = "";
 
-        for(int i = 0; i < csv.size(); i++) {
+        for (int i = 0; i < csv.size(); i++) {
 
-            if (i == csv.size()-1)
+            if (i == csv.size() - 1)
                 tempStr += csv.get(i);
-             else
+            else
                 tempStr += csv.get(i) + ",";
 
         }
         return tempStr;
     }
 
+    private void createDirForCsvData() {
+
+
+
+    }
     /**
      * Write invalid data to a CSV file
      */
@@ -142,8 +148,9 @@ public class CsvParser {
 
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmm'.csv'").format(new Date());
 
+        FilePathRetriever.createDirectory(csvInfoDir);
         FileWriter csvFileWriter = new FileWriter(
-                "C:\\Users\\tkd_s\\eclipse-workspace\\csv2sqlite\\bad_csv_data\\bad-data-"
+                csvInfoDir + "\\bad-data-"
                         + timeStamp);
 
         System.out.println("Writing bad data to " + "bad-data-" + timeStamp);
@@ -170,11 +177,27 @@ public class CsvParser {
 
         try {
 
+            FilePathRetriever.createDirectory(csvInfoDir);
+            // Create the file in the "csv_info" directory if it doesn't exist
+            File logFile = new File(csvInfoDir, "csv2sqlite.log");
+            if (!logFile.exists()) {
+                if (logFile.createNewFile()) {
+                    System.out.println("Log file created successfully.");
+                } else {
+                    System.out.println("Failed to create log file.");
+                }
+            } else {
+                System.out.println("Log file already exists.");
+            }
+
             // This block configures the logger with handler and formatter
             fh = new FileHandler("D://csv2sqlite.log");
             logger.addHandler(fh);
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
+
+
+
 
 
             System.out.println("Printing statistics to a log file...");

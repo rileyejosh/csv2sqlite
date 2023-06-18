@@ -6,10 +6,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DbConnectionManager {
-
+static Connection conn = null;
   /**
    * This helper method facilitates connections to a SQlite database.
-   * 
+   *
    * @return
    */
   public static Connection connect() {
@@ -29,6 +29,14 @@ public class DbConnectionManager {
 
     }
     return conn;
+  }
+
+  public static void close()  {
+    try {
+      conn.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
 }
