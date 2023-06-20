@@ -6,7 +6,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DbConnectionManager {
-static Connection conn = null;
+
+  static Connection conn;
+  static String url = "jdbc:sqlite::resource:csv.db";
+
   /**
    * This helper method facilitates connections to a SQlite database.
    *
@@ -14,14 +17,12 @@ static Connection conn = null;
    */
   public static Connection connect() {
 
-    String url = "jdbc:sqlite:C:/sqlite/db/" + "csv.db";
-    Connection conn = null;
     try {
+
       conn = DriverManager.getConnection(url);
 
       if (conn != null) {
-        // DatabaseMetaData meta = conn.getMetaData();
-        // System.out.println("The driver name is: " + meta.getDriverName());
+
         System.out.println("Connection to " + url + " has been established.");
       }
     } catch (SQLException e) {
@@ -31,9 +32,12 @@ static Connection conn = null;
     return conn;
   }
 
-  public static void close()  {
+  public static void close() {
     try {
-      conn.close();
+      if(conn != null) {
+        conn.close();
+        System.out.println("The connection was closed.");
+      }
     } catch (SQLException e) {
       e.printStackTrace();
     }

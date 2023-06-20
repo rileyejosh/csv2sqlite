@@ -2,12 +2,11 @@ package com.jer.app.utilities;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class FilePathRetriever  {
 
-  String fileSeparator = File.separator;
-  String path = System.getProperty("user.dir") + fileSeparator;
+  static String fileSeparator = File.separator;
+  static String path = System.getProperty("user.dir") + fileSeparator;
 
   public static File getFile(String filePath) throws FileNotFoundException {
 
@@ -30,10 +29,10 @@ public class FilePathRetriever  {
 
   /**
    * Creates directory if it does not exist.
+   *
    * @param dir Directory to be created/checked
-   * @return String with notification of directory creation.
    */
-  public static String createDirectory(String dir) {
+  public static void createDirectory(String dir) {
     File fileDir = new File(dir);
     boolean result = false;
 
@@ -48,15 +47,13 @@ public class FilePathRetriever  {
 
       } catch (SecurityException se) {
 
-        return "Directory could not be created...\n" + se.getMessage();
+        System.out.println(se.getMessage());
       }
-      return "Created directory: " + dir + " successfully";
     }
 
-    return "Directory " + dir + " exists...";
   }
 
-  public String getPath() {
+  public static String getPath() {
     return path;
   }
 

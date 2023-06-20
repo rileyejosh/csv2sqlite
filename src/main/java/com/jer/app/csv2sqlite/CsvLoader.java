@@ -40,7 +40,8 @@ public class CsvLoader {
     }
     sqlTable += "\n);";
 
-    try (Connection conn = DbConnectionManager.connect(); Statement stmt = conn.createStatement()) {
+    try (Connection conn = DbConnectionManager.connect()) {
+      Statement stmt = conn.createStatement();
       stmt.execute(sqlTable);
 
     } catch (SQLException e) {
@@ -103,21 +104,12 @@ public class CsvLoader {
 
   /**
    * This method loads the CSV data to a SQlite database.
-   * 
+   *
    * @throws SQLException if underlying database connections
    */
   public void loadDataToDb() throws SQLException {
 
-    String url = "jdbc:sqlite:C:/sqlite/db/" + "csv.db";
-    Connection conn = null;
-
-    try {
-      conn = DriverManager.getConnection(url);
-
-      if (conn != null) {
-
-        System.out.println("Connection to " + url + " has been established.");
-      }
+    try(Connection conn = DbConnectionManager.connect()) {
 
 
       // create database table
@@ -159,11 +151,10 @@ public class CsvLoader {
 
         index = 1;
 
-      } 
+      }
       ps.executeBatch();
 
       ps.close();
-      conn.close();
 
     } catch (SQLException e) {
 

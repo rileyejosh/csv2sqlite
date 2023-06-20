@@ -2,11 +2,8 @@ package com.jer.app.csv2sqlite;
 
 import com.jer.app.utilities.FilePathRetriever;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 // import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import java.text.SimpleDateFormat;
 
@@ -17,7 +14,7 @@ import java.util.logging.SimpleFormatter;
 
 public class CsvParser {
 
-    File csvFile = null;
+    Object csvFile = null;
     List<String> badData;
     int recordsReceived = 0;
     int recordsSuccessful = 0;
@@ -26,13 +23,21 @@ public class CsvParser {
 
 
     /**
-     * This constructor initializes the CSV file reference.
+     * This constructor initializes the CSV resource.
      *
      * @param csvFile representing the input CSV file
      */
-    public CsvParser(File csvFile) {
+    public CsvParser(Object csvFile) throws InstantiationException {
 
-        this.csvFile = csvFile;
+        if(csvFile instanceof File) {
+            this.csvFile = (File) csvFile;
+        }
+        else if(csvFile instanceof InputStream) {
+            this.csvFile = (InputStream) csvFile;
+        }
+        else {
+            throw new InstantiationException("This type of Csv resource is not allowed.");
+        }
 
     }
 
@@ -43,10 +48,13 @@ public class CsvParser {
      * @throws IOException - throw exception if the file reference is null.
      */
     public List<List<String>> parseCsvFile() throws IOException {
-
+        Scanner parser = null;
 
         // open CSV file
-        Scanner parser = new Scanner(csvFile).useDelimiter(",");
+        if(csvFile instanceof File)
+            parser = new Scanner((File)csvFile).useDelimiter(",");
+        else
+            parser = new Scanner((InputStream) csvFile).useDelimiter(",");
 
         // parse through csv file and add each record to the list
         List<String> records = new ArrayList<String>();
@@ -194,7 +202,7 @@ public class CsvParser {
                     return;
                 }
             } else {
-                System.out.println("Log file already exists.");
+
                 // This block configures the logger with handler and formatter
                 fh = new FileHandler(csvInfoDir + "\\" + "csv2sqlite.log");
                 logger.addHandler(fh);
