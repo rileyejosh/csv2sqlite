@@ -25,3 +25,13 @@ Rules and guidelines:
 2) Utilizing existing tools like Maven and open source libraries is encouraged.
 3) A finished solution is great but if you do not get it all completed, that is ok - we will evaluate based on approach
 4) It is required that you provide a README detailing the challenge. Your readme should include instructions to run your code, and a brief paragraph describing the approach you took to solve the challenge
+
+Instructions:
+
+Run as an app:
+
+java -jar csv2sqlite-0.0.1-SNAPSHOT-jar-with-dependencies.jar <optional_argument>
+
+The argument must be in reference to a file with the .csv extension; otherwise, an exception will be thrown.
+
+
