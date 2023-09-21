@@ -1,4 +1,4 @@
-csv2sqlite
+# csv2sqlite
 
 Data for the project is included in the sample CSV file, attached. Please create a Github or Bitbucket repository for the project and push all code there; please email the link to the repository when you submit your project.
 
@@ -26,12 +26,16 @@ Rules and guidelines:
 3) A finished solution is great but if you do not get it all completed, that is ok - we will evaluate based on approach
 4) It is required that you provide a README detailing the challenge. Your readme should include instructions to run your code, and a brief paragraph describing the approach you took to solve the challenge
 
-Instructions:
+## Instructions to Run the App:
 
-Run app as a JAR:
+### Run app as a JAR:
 
 java -jar csv2sqlite-0.0.1-SNAPSHOT-jar-with-dependencies.jar <optional_argument>
 
 The argument must be in reference to a file with the .csv extension; otherwise, an exception will be thrown.
+
+### Run app in a container:
+
+Ensure that you have a container engine installed, i.e. Docker
 
 
