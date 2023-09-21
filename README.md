@@ -28,7 +28,7 @@ Rules and guidelines:
 
 Instructions:
 
-Run as an app:
+Run app as a JAR:
 
 java -jar csv2sqlite-0.0.1-SNAPSHOT-jar-with-dependencies.jar <optional_argument>
 
